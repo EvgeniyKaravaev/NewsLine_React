@@ -34,25 +34,25 @@ function Registration() {
             <AppInfo title={"Зарегистрироваться"} />
 
             <form onSubmit={onnAdd}>
-                <label>
+                <ul>
                     <p>Имя</p>
                     <input type="first_name" onChange={e => setFirstName(e.target.value)} />
-                </label>
-                <label>
+                </ul>
+                <ul>
                     <p>Фамилия</p>
                     <input type="last_name" onChange={e => setLastName(e.target.value)} />
-                </label>
-                <label>
+                </ul>
+                <ul>
                     <p>Email</p>
                     <input type="email" onChange={e => setEmail(e.target.value)} />
-                </label>
-                <label>
+                </ul>
+                <ul>
                     <p>Password</p>
                     <input type="password" onChange={e => setPassword(e.target.value)} />
-                </label>
-                <div>
+                </ul>
+                <ul>
                     <button type="submit">Регистрация</button>
-                </div>
+                </ul>
             </form>
         </div>
     );

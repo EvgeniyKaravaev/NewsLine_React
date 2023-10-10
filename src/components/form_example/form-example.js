@@ -35,20 +35,18 @@ function FormExample({ setToken }) {
 
   return (
     <div className="app-add-form">
-      <h3>Авторизуйтесь</h3>
-
       <form onSubmit={handleSubmit}>
-        <label>
+        <ul>
           <p>Email</p>
           <input type="email" onChange={e => setEmail(e.target.value)} />
-        </label>
-        <label>
+        </ul>
+        <ul>
           <p>Password</p>
           <input type="password" onChange={e => setPassword(e.target.value)} />
-        </label>
-        <div>
+        </ul>
+        <ul>
           <button type="submit">Авторизация</button>
-        </div>
+        </ul>
       </form>
     </div>
   );
