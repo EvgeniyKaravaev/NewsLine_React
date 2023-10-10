@@ -2,6 +2,17 @@ import AppInfo from '../app_info/app-info';
 
 import { useState } from 'react';
 
+async function postUser(credentials) {
+    return fetch('http://localhost:4000/api/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+        .then(data => data.json())
+}
+
 function Registration() {
 
     const [first_name, setFirstName] = useState('');
@@ -12,28 +23,22 @@ function Registration() {
 
     const [password, setPassword] = useState('');
 
-    const onnAdd = async () => {
-        await fetch('http://localhost:4000/api/create', {
-            method: 'POST',
-            body: JSON.stringify({
-                first_name: first_name,
-                last_Name: last_name,
-                email: email,
-                password: password,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const param = await postUser({
+            first_name,
+            last_name,
+            email,
+            password
+        });
+        console.log(param);
     }
 
     return (
         <div className="App">
             <AppInfo title={"Зарегистрироваться"} />
 
-            <form onSubmit={onnAdd}>
+            <form onSubmit={handleSubmit}>
                 <ul>
                     <p>Имя</p>
                     <input type="first_name" onChange={e => setFirstName(e.target.value)} />
