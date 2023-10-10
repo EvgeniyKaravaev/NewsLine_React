@@ -13,25 +13,6 @@ function Registration() {
     const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
-    
-    const onAdd = async (first_name, last_name, email, password) => {
-        await fetch('http://localhost:4000/api/create', {
-            method: 'POST',
-            body: JSON.stringify({
-                first_name: first_name,
-                last_name: last_name,
-                email: email,
-                password: password,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => { setUsers((users) => [...users, data]) });
-    };
-
-
 
     return (
         <div className="App">
