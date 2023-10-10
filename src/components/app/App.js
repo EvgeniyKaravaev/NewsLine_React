@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Home from '../home/home';
 import Login from '../auth/login';
+import Registration from '../auth/registration';
+import Token from '../util/token';
 
 function App() {
 
-  const [token, setToken] = useState();
+  const { token, setToken } = Token();
 
   if (!token) {
     return (
@@ -24,10 +26,14 @@ function App() {
             <li>
               <Link to="/">Главная страница</Link>
             </li>
+            <li>
+              <Link to="/registration">Страница регистрации</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/registration" element={<Registration />} />
         </Routes>
       </div>
     </Router>

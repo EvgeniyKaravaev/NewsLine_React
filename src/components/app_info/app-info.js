@@ -1,13 +1,12 @@
 import './app-info.scss';
 
-const AppInfo = (props) => {
+const AppInfo = ({title}) => {
+
 
     return (
 
         <div className="app-info">
-
-            <h1>Страница авторизации</h1>
-
+            <h1>{title}</h1>
         </div>
     );
 }

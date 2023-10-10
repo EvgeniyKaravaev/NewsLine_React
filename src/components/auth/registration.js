@@ -1,40 +1,63 @@
 import AppInfo from '../app_info/app-info';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 
 function Registration() {
+
+    const [users, setUsers] = useState([]);
+
+    const [first_name, setFirstName] = useState('');
+
+    const [last_name, setLastName] = useState('');
+
+    const [email, setEmail] = useState('');
+
+    const [password, setPassword] = useState('');
+    
+    const onAdd = async (first_name, last_name, email, password) => {
+        await fetch('http://localhost:4000/api/create', {
+            method: 'POST',
+            body: JSON.stringify({
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                password: password,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => { setUsers((users) => [...users, data]) });
+    };
+
+
+
     return (
         <div className="App">
-            <AppInfo />
-            <div>
-                <h3>Зарегистрироваться</h3>
+            <AppInfo title={"Зарегистрироваться"} />
 
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Имя</Form.Label>
-                        <Form.Control type="email" placeholder="Имя" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicLastName">
-                        <Form.Label>Фамилия</Form.Label>
-                        <Form.Control type="email" placeholder="Фамилия" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Email" />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Пароль</Form.Label>
-                        <Form.Control type="password" placeholder="Пароль" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Регистрация
-                    </Button>
-                </Form>
-            </div>
+            <form onSubmit={onAdd}>
+                <label>
+                    <p>Имя</p>
+                    <input type="first_name" onChange={e => setFirstName(e.target.value)} />
+                </label>
+                <label>
+                    <p>Фамилия</p>
+                    <input type="last_name" onChange={e => setLastName(e.target.value)} />
+                </label>
+                <label>
+                    <p>Email</p>
+                    <input type="email" onChange={e => setEmail(e.target.value)} />
+                </label>
+                <label>
+                    <p>Password</p>
+                    <input type="password" onChange={e => setPassword(e.target.value)} />
+                </label>
+                <div>
+                    <button type="submit">Регистрация</button>
+                </div>
+            </form>
         </div>
     );
 }
